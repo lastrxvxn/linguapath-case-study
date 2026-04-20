@@ -1,0 +1,74 @@
+
+<style>
+.phone-wrap { background: var(--color-background-secondary); border-radius: 24px; padding: 24px; display: flex; justify-content: center; }
+.phone { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: 20px; width: 320px; min-height: 620px; display: flex; flex-direction: column; overflow: hidden; }
+.top-bar { display: flex; align-items: center; justify-content: space-between; padding: 14px 20px 8px; }
+.back-btn { font-size: 13px; color: var(--color-text-secondary); background: none; border: none; cursor: pointer; padding: 0; }
+.q-counter { font-size: 12px; color: var(--color-text-tertiary); }
+.progress-bar-wrap { padding: 0 20px 16px; }
+.progress-bar-bg { height: 3px; background: var(--color-border-tertiary); border-radius: 2px; }
+.progress-bar-fill { height: 3px; background: #1D9E75; border-radius: 2px; width: 40%; }
+.screen-body { padding: 0 20px 24px; flex: 1; display: flex; flex-direction: column; }
+.context-label { font-size: 11px; font-weight: 500; color: #0F6E56; letter-spacing: 0.06em; margin: 0 0 10px; text-transform: uppercase; }
+.scenario-card { background: #E1F5EE; border: 0.5px solid #9FE1CB; border-radius: 12px; padding: 16px; margin-bottom: 20px; }
+.scenario-text { font-size: 14px; color: #085041; line-height: 1.6; margin: 0; }
+.question-text { font-size: 16px; font-weight: 500; color: var(--color-text-primary); line-height: 1.4; margin: 0 0 20px; }
+.option-row { border: 0.5px solid var(--color-border-tertiary); border-radius: 10px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; }
+.option-row.picked { border-color: #1D9E75; background: #E1F5EE; }
+.option-dot { width: 18px; height: 18px; border-radius: 50%; border: 1.5px solid var(--color-border-secondary); flex-shrink: 0; margin-top: 1px; }
+.option-row.picked .option-dot { background: #1D9E75; border-color: #1D9E75; }
+.option-text { font-size: 13px; color: var(--color-text-primary); line-height: 1.5; }
+.option-row.picked .option-text { color: #085041; }
+.spacer { flex: 1; }
+.hint-row { display: flex; align-items: center; gap: 6px; }
+.hint-icon { width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--color-border-secondary); display: flex; align-items: center; justify-content: center; }
+.hint-text { font-size: 12px; color: var(--color-text-tertiary); }
+</style>
+<h2 class="sr-only">Screen 2: Skill assessment — mobile app showing a situational scenario question with four response options</h2>
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="top-bar">
+      <button class="back-btn">← Back</button>
+      <span class="q-counter">Question 2 of 5</span>
+    </div>
+    <div class="progress-bar-wrap">
+      <div class="progress-bar-bg"><div class="progress-bar-fill"></div></div>
+    </div>
+    <div class="screen-body">
+      <p class="context-label">Workplace scenario</p>
+      <div class="scenario-card">
+        <p class="scenario-text">Your manager asks you to give a quick update on your project — in front of the whole team. You weren't expecting it.</p>
+      </div>
+      <p class="question-text">What would you most likely do in this situation?</p>
+
+      <div class="option-row" onclick="pick(this)">
+        <div class="option-dot"></div>
+        <p class="option-text">Say "I'm not ready" and ask to go last</p>
+      </div>
+      <div class="option-row picked" onclick="pick(this)">
+        <div class="option-dot"></div>
+        <p class="option-text">Give a brief update but feel uncertain about how it sounded</p>
+      </div>
+      <div class="option-row" onclick="pick(this)">
+        <div class="option-dot"></div>
+        <p class="option-text">Speak confidently — I handle these situations well</p>
+      </div>
+      <div class="option-row" onclick="pick(this)">
+        <div class="option-dot"></div>
+        <p class="option-text">Give a structured update using clear professional language</p>
+      </div>
+
+      <div class="spacer"></div>
+      <div class="hint-row">
+        <div class="hint-icon" style="font-size:10px; color: var(--color-text-tertiary); text-align:center; line-height:14px;">?</div>
+        <p class="hint-text">There are no wrong answers — this helps us calibrate your path</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function pick(el) {
+  document.querySelectorAll('.option-row').forEach(r => r.classList.remove('picked'));
+  el.classList.add('picked');
+}
+</script>

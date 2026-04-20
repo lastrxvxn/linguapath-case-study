@@ -1,0 +1,129 @@
+
+<style>
+.phone-wrap { background: var(--color-background-secondary); border-radius: 24px; padding: 24px; display: flex; justify-content: center; }
+.phone { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: 20px; width: 320px; min-height: 660px; display: flex; flex-direction: column; overflow: hidden; }
+.page-header { padding: 14px 20px 12px; border-bottom: 0.5px solid var(--color-border-tertiary); display: flex; align-items: center; justify-content: space-between; }
+.page-title { font-size: 16px; font-weight: 500; color: var(--color-text-primary); margin: 0; }
+.page-sub { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
+.page-body { padding: 16px 20px; flex: 1; display: flex; flex-direction: column; gap: 16px; overflow: auto; }
+.mentor-card { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 14px; display: flex; gap: 12px; align-items: flex-start; }
+.mentor-avatar { width: 44px; height: 44px; border-radius: 50%; background: #EEEDFE; display: flex; align-items: center; justify-content: center; font-size: 14px; font-weight: 500; color: #534AB7; flex-shrink: 0; }
+.mentor-name { font-size: 15px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+.mentor-spec { font-size: 11px; color: #534AB7; background: #EEEDFE; border-radius: 4px; padding: 2px 7px; display: inline-block; margin-bottom: 4px; }
+.mentor-bio { font-size: 12px; color: var(--color-text-secondary); margin: 0 0 6px; line-height: 1.4; }
+.mentor-stats { font-size: 11px; color: var(--color-text-tertiary); }
+.section-title { font-size: 12px; font-weight: 500; color: var(--color-text-secondary); margin: 0 0 8px; }
+.session-types { display: flex; flex-direction: column; gap: 8px; }
+.session-row { border: 0.5px solid var(--color-border-tertiary); border-radius: 9px; padding: 11px 14px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+.session-row.selected { border-color: #534AB7; background: #EEEDFE; }
+.session-radio { width: 16px; height: 16px; border-radius: 50%; border: 1.5px solid var(--color-border-secondary); flex-shrink: 0; }
+.session-row.selected .session-radio { background: #534AB7; border-color: #534AB7; }
+.session-label { font-size: 13px; color: var(--color-text-primary); font-weight: 500; }
+.session-row.selected .session-label { color: #3C3489; }
+.session-desc { font-size: 11px; color: var(--color-text-secondary); margin: 0; }
+.session-row.selected .session-desc { color: #534AB7; }
+.slot-grid { }
+.day-cols { display: flex; gap: 8px; }
+.day-col { flex: 1; }
+.day-name { font-size: 10px; color: var(--color-text-tertiary); text-align: center; margin-bottom: 5px; }
+.slot-chip { font-size: 11px; border-radius: 6px; padding: 6px 4px; text-align: center; cursor: pointer; margin-bottom: 5px; background: var(--color-background-secondary); color: var(--color-text-secondary); border: 0.5px solid var(--color-border-tertiary); }
+.slot-chip.sel { background: #1D9E75; color: #E1F5EE; border-color: #1D9E75; }
+.slot-chip.none { background: none; border: none; cursor: default; color: transparent; }
+.confirm-btn { width: 100%; padding: 14px; border-radius: 10px; background: #1D9E75; color: #E1F5EE; font-size: 15px; font-weight: 500; border: none; cursor: pointer; margin-top: 4px; }
+</style>
+<h2 class="sr-only">Screen 6: Mentor booking showing mentor profile, session type selector, and time slot availability</h2>
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="page-header">
+      <div>
+        <p class="page-title">Book a session</p>
+        <p class="page-sub">60-minute guided review</p>
+      </div>
+    </div>
+    <div class="page-body">
+
+      <div class="mentor-card">
+        <div class="mentor-avatar">CM</div>
+        <div>
+          <p class="mentor-name">Clara Mendez</p>
+          <span class="mentor-spec">Workplace speaking</span>
+          <p class="mentor-bio">Certified English coach · 8 years with international professionals</p>
+          <p class="mentor-stats">312 sessions · 4.9 rating</p>
+        </div>
+      </div>
+
+      <div>
+        <p class="section-title">What type of session do you need?</p>
+        <div class="session-types">
+          <div class="session-row selected" onclick="pickType(this)">
+            <div class="session-radio"></div>
+            <div>
+              <p class="session-label">Speaking review</p>
+              <p class="session-desc">Live practice and pronunciation feedback</p>
+            </div>
+          </div>
+          <div class="session-row" onclick="pickType(this)">
+            <div class="session-radio"></div>
+            <div>
+              <p class="session-label">Written communication</p>
+              <p class="session-desc">Email, report, or async writing review</p>
+            </div>
+          </div>
+          <div class="session-row" onclick="pickType(this)">
+            <div class="session-radio"></div>
+            <div>
+              <p class="session-label">Interview preparation</p>
+              <p class="session-desc">Mock interview with structured feedback</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="slot-grid">
+        <p class="section-title">Available this week</p>
+        <div class="day-cols">
+          <div class="day-col">
+            <p class="day-name">Mon</p>
+            <div class="slot-chip none">—</div>
+          </div>
+          <div class="day-col">
+            <p class="day-name">Tue</p>
+            <div class="slot-chip">6 PM</div>
+          </div>
+          <div class="day-col">
+            <p class="day-name">Wed</p>
+            <div class="slot-chip">5 PM</div>
+            <div class="slot-chip">7 PM</div>
+          </div>
+          <div class="day-col">
+            <p class="day-name">Thu</p>
+            <div class="slot-chip none">—</div>
+          </div>
+          <div class="day-col">
+            <p class="day-name">Fri</p>
+            <div class="slot-chip sel" id="sel-slot">6 PM</div>
+            <div class="slot-chip">8 PM</div>
+          </div>
+          <div class="day-col">
+            <p class="day-name">Sat</p>
+            <div class="slot-chip">10 AM</div>
+          </div>
+        </div>
+      </div>
+
+      <button class="confirm-btn">Confirm — Fri 6:00 PM</button>
+    </div>
+  </div>
+</div>
+<script>
+function pickType(el) {
+  document.querySelectorAll('.session-row').forEach(r => r.classList.remove('selected'));
+  el.classList.add('selected');
+}
+document.querySelectorAll('.slot-chip:not(.none)').forEach(chip => {
+  chip.addEventListener('click', function() {
+    document.querySelectorAll('.slot-chip').forEach(c => c.classList.remove('sel'));
+    this.classList.add('sel');
+  });
+});
+</script>

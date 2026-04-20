@@ -1,0 +1,86 @@
+
+<style>
+.phone-wrap { background: var(--color-background-secondary); border-radius: 24px; padding: 24px; display: flex; justify-content: center; }
+.phone { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: 20px; width: 320px; min-height: 640px; display: flex; flex-direction: column; overflow: hidden; }
+.lesson-top { padding: 14px 20px 10px; }
+.lesson-toprow { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+.back-x { background: none; border: none; cursor: pointer; padding: 0; display: flex; align-items: center; gap: 6px; }
+.back-x-text { font-size: 13px; color: var(--color-text-secondary); }
+.step-label { font-size: 12px; color: var(--color-text-tertiary); }
+.lesson-bar-bg { height: 3px; background: var(--color-border-tertiary); border-radius: 2px; }
+.lesson-bar-fill { height: 3px; background: #1D9E75; border-radius: 2px; width: 60%; }
+.lesson-body { padding: 16px 20px 20px; flex: 1; display: flex; flex-direction: column; gap: 14px; }
+.type-chip { display: inline-flex; align-items: center; gap: 6px; border: 0.5px solid var(--color-border-tertiary); border-radius: 5px; padding: 4px 10px; }
+.type-chip-text { font-size: 11px; color: var(--color-text-secondary); }
+.scenario-card { background: #E1F5EE; border: 0.5px solid #9FE1CB; border-radius: 12px; padding: 14px; }
+.scenario-overline { font-size: 10px; font-weight: 500; color: #0F6E56; letter-spacing: 0.06em; margin: 0 0 6px; }
+.scenario-body { font-size: 13px; color: #085041; line-height: 1.6; margin: 0; }
+.task-prompt { font-size: 15px; font-weight: 500; color: var(--color-text-primary); line-height: 1.4; margin: 0; }
+.response-area { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+.response-label { font-size: 12px; color: var(--color-text-secondary); margin: 0; }
+.response-textarea { width: 100%; border: 0.5px solid var(--color-border-secondary); border-radius: 10px; padding: 12px; font-size: 14px; color: var(--color-text-primary); background: var(--color-background-primary); resize: none; font-family: inherit; line-height: 1.5; box-sizing: border-box; min-height: 110px; outline: none; }
+.response-textarea:focus { border-color: #1D9E75; box-shadow: 0 0 0 3px #E1F5EE; }
+.char-row { display: flex; justify-content: space-between; }
+.char-count { font-size: 11px; color: var(--color-text-tertiary); }
+.tip-row { display: flex; align-items: center; gap: 6px; }
+.tip-btn { background: none; border: 0.5px solid var(--color-border-tertiary); border-radius: 6px; padding: 5px 10px; font-size: 12px; color: var(--color-text-secondary); cursor: pointer; }
+.tip-reveal { font-size: 12px; color: var(--color-text-secondary); background: var(--color-background-secondary); border-radius: 8px; padding: 10px 12px; line-height: 1.5; display: none; }
+.tip-reveal.visible { display: block; }
+.submit-btn { width: 100%; padding: 14px; border-radius: 10px; background: #1D9E75; color: #E1F5EE; font-size: 15px; font-weight: 500; border: none; cursor: pointer; margin-top: 4px; }
+</style>
+<h2 class="sr-only">Screen 5: Lesson screen showing a workplace scenario card and a written response input area</h2>
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="lesson-top">
+      <div class="lesson-toprow">
+        <button class="back-x">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+          <span class="back-x-text">Exit lesson</span>
+        </button>
+        <span class="step-label">Step 3 of 5</span>
+      </div>
+      <div class="lesson-bar-bg"><div class="lesson-bar-fill"></div></div>
+    </div>
+    <div class="lesson-body">
+      <div class="type-chip">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="var(--color-text-secondary)" stroke-width="1.5"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+        <span class="type-chip-text">Written response practice</span>
+      </div>
+
+      <div class="scenario-card">
+        <p class="scenario-overline">Scenario</p>
+        <p class="scenario-body">You're wrapping up a project status meeting. Your manager asks you to summarize the key next steps for the whole team before everyone logs off.</p>
+      </div>
+
+      <p class="task-prompt">Write a 2–3 sentence spoken summary you would use in this moment. Focus on clarity and professional tone.</p>
+
+      <div class="response-area">
+        <p class="response-label">Your response</p>
+        <textarea class="response-textarea" id="resp" placeholder="Type your response here..." oninput="updateCount()">To summarize: our next steps are to finalize the design by Thursday, share the draft with the client on Friday, and reconvene Monday to review feedback.</textarea>
+        <div class="char-row">
+          <span class="char-count" id="cc">152 characters</span>
+          <span class="char-count">Aim for 2–3 sentences</span>
+        </div>
+      </div>
+
+      <div class="tip-row">
+        <button class="tip-btn" onclick="toggleTip()">Show tip</button>
+      </div>
+      <div class="tip-reveal" id="tip">Try using a structure: signal the summary ("To summarize..."), list the steps, then close with a timeframe or owner for each action.</div>
+
+      <button class="submit-btn">Submit response</button>
+    </div>
+  </div>
+</div>
+<script>
+function updateCount() {
+  const v = document.getElementById('resp').value.length;
+  document.getElementById('cc').textContent = v + ' characters';
+}
+function toggleTip() {
+  const t = document.getElementById('tip');
+  t.classList.toggle('visible');
+  const btn = document.querySelector('.tip-btn');
+  btn.textContent = t.classList.contains('visible') ? 'Hide tip' : 'Show tip';
+}
+</script>

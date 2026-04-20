@@ -1,0 +1,98 @@
+
+<style>
+.phone-wrap { background: var(--color-background-secondary); border-radius: 24px; padding: 24px; display: flex; justify-content: center; }
+.phone { background: var(--color-background-primary); border: 0.5px solid var(--color-border-secondary); border-radius: 20px; width: 320px; min-height: 620px; overflow: hidden; display: flex; flex-direction: column; }
+.status-bar { display: flex; justify-content: space-between; padding: 12px 20px 8px; }
+.status-text { font-size: 11px; color: var(--color-text-tertiary); }
+.screen-body { padding: 24px 20px 20px; flex: 1; display: flex; flex-direction: column; }
+.step-indicator { display: flex; gap: 6px; margin-bottom: 28px; }
+.step-dot { height: 3px; border-radius: 2px; flex: 1; }
+.step-active { background: #1D9E75; }
+.step-inactive { background: var(--color-border-tertiary); }
+.screen-headline { font-size: 20px; font-weight: 500; color: var(--color-text-primary); line-height: 1.3; margin: 0 0 6px; }
+.screen-sub { font-size: 13px; color: var(--color-text-secondary); margin: 0 0 24px; line-height: 1.5; }
+.goal-card { border: 0.5px solid var(--color-border-tertiary); border-radius: 12px; padding: 14px 16px; margin-bottom: 10px; cursor: pointer; display: flex; align-items: flex-start; gap: 12px; transition: border-color 0.15s; background: var(--color-background-primary); }
+.goal-card.selected { border: 1.5px solid #1D9E75; background: #E1F5EE; }
+.goal-icon { width: 36px; height: 36px; border-radius: 8px; background: var(--color-background-secondary); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.goal-icon svg { width: 16px; height: 16px; stroke: var(--color-text-secondary); fill: none; stroke-width: 1.5; }
+.goal-card.selected .goal-icon { background: #9FE1CB; }
+.goal-card.selected .goal-icon svg { stroke: #085041; }
+.goal-label { font-size: 14px; font-weight: 500; color: var(--color-text-primary); margin: 0 0 2px; }
+.goal-card.selected .goal-label { color: #085041; }
+.goal-desc { font-size: 12px; color: var(--color-text-secondary); margin: 0; line-height: 1.4; }
+.goal-card.selected .goal-desc { color: #0F6E56; }
+.spacer { flex: 1; }
+.multi-link { font-size: 12px; color: var(--color-text-tertiary); text-align: center; margin-bottom: 16px; }
+.cta-btn { width: 100%; padding: 14px; border-radius: 10px; font-size: 15px; font-weight: 500; border: none; cursor: pointer; transition: background 0.15s; }
+.cta-active { background: #1D9E75; color: #E1F5EE; }
+.cta-disabled { background: var(--color-background-secondary); color: var(--color-text-tertiary); cursor: not-allowed; border: 0.5px solid var(--color-border-tertiary); }
+</style>
+<h2 class="sr-only">Screen 1: Goal selection — mobile app mockup showing four professional goal options</h2>
+<div class="phone-wrap">
+  <div class="phone">
+    <div class="status-bar">
+      <span class="status-text">9:41</span>
+      <span class="status-text">Step 1 of 3</span>
+    </div>
+    <div class="screen-body">
+      <div class="step-indicator">
+        <div class="step-dot step-active"></div>
+        <div class="step-dot step-inactive"></div>
+        <div class="step-dot step-inactive"></div>
+      </div>
+      <p class="screen-headline">What's your main focus right now?</p>
+      <p class="screen-sub">We'll build your learning path around this goal.</p>
+
+      <div class="goal-card selected" onclick="selectGoal(this)">
+        <div class="goal-icon">
+          <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <div>
+          <p class="goal-label">Meetings and presentations</p>
+          <p class="goal-desc">Communicate confidently in team meetings and client calls</p>
+        </div>
+      </div>
+
+      <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-icon">
+          <svg viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>
+        </div>
+        <div>
+          <p class="goal-label">Job interviews in English</p>
+          <p class="goal-desc">Prepare for international roles and hiring processes</p>
+        </div>
+      </div>
+
+      <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-icon">
+          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div>
+          <p class="goal-label">Professional writing</p>
+          <p class="goal-desc">Write clear emails, reports, and workplace messages</p>
+        </div>
+      </div>
+
+      <div class="goal-card" onclick="selectGoal(this)">
+        <div class="goal-icon">
+          <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <div>
+          <p class="goal-label">Everyday workplace confidence</p>
+          <p class="goal-desc">Build fluency for daily work interactions and collaboration</p>
+        </div>
+      </div>
+
+      <div class="spacer"></div>
+      <p class="multi-link">I have more than one goal</p>
+      <button class="cta-btn cta-active" id="cta-btn">Continue</button>
+    </div>
+  </div>
+</div>
+<script>
+function selectGoal(el) {
+  document.querySelectorAll('.goal-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  document.getElementById('cta-btn').className = 'cta-btn cta-active';
+}
+</script>
